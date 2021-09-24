@@ -1,0 +1,27 @@
+<form nonvalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+    <input type="hidden" name="number"
+    [value]="service.formData.number"/>
+    <div class="form-group">
+        <label>Name</label>
+        <input class="form-control form-control-lg" placeholder="Name"
+        name="Name" #playerName="ngModel" [(ngModel)]="service.formData.name" 
+        required>
+    </div>
+    <div class="form-group">
+        <label>Role</label>
+        <input type="text" class="form-control form-control-lg" placeholder="Role"
+        name="role" #role="ngModel" [(ngModel)]="service.formData.role" 
+        required [class.invalid]="role.invalid && role.touched">
+    </div>
+    <div class="form-group">
+        <label>Country</label>
+        <input type="text" class="form-control form-control-lg" placeholder="Country"
+        name="country" #country="ngModel" [(ngModel)]="service.formData.country" 
+        required [class.invalid]="country.invalid && country.touched">
+    </div>
+    <br>
+
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">Submit</button>
+    </div>
+</form>

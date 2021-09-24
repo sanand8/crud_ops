@@ -1,0 +1,29 @@
+<div class="jumbotron py-3">
+    <h1 class="display-4 text-center">Player Details</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <app-teamform> </app-teamform>
+    </div>
+    <div class="col-md-6">
+        <table class="table">
+            <thead class="thread-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Country</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let trd of service.list">
+                    <td (click)="populateForm(trd)">{{trd.name}}</td>
+                    <td (click)="populateForm(trd)">{{trd.role}}</td>
+                    <td (click)="populateForm(trd)">{{trd.country}}</td>
+                    <td><i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(trd.number)"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
