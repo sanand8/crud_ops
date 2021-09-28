@@ -137,3 +137,6 @@ C:\Users\shuanand\source\repos\WebApplication6\WebApplication6\bin\Debug\netcore
 C:\Users\shuanand\source\repos\WebApplication6\WebApplication6\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
 C:\Users\shuanand\source\repos\WebApplication6\WebApplication6\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\shuanand\source\repos\WebApplication6\WebApplication6\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\shuanand\source\repos\WebApplication6\WebApplication6\bin\Debug\netcoreapp3.1\RabbitMQ.Client.dll
+C:\Users\shuanand\source\repos\WebApplication6\WebApplication6\bin\Debug\netcoreapp3.1\System.Threading.Channels.dll
+C:\Users\shuanand\source\repos\WebApplication6\WebApplication6\bin\Debug\netcoreapp3.1\Elasticsearch.Net.dll

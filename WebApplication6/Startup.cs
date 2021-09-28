@@ -1,3 +1,4 @@
+using Elasticsearch.Net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,9 +8,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using WebApplication6.Models;
 
@@ -40,6 +44,26 @@ namespace WebApplication6
             .AllowAnyMethod()
             .AllowAnyHeader()
             );
+
+            var factory = new ConnectionFactory { 
+              Uri = new Uri("amqp://hack:1234@localhost:5672")
+            };
+            /*ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "hack";
+            factory.Password = "1234";
+            factory.HostName = "localhost:15672/";*/
+            using RabbitMQ.Client.IConnection connection = factory.CreateConnection();
+            using var channel = connection.CreateModel();
+
+            channel.QueueDeclare("test-queue",
+                durable: true,
+                exclusive: false,
+                autoDelete: false,
+                arguments: null);
+            var message = new { Name = "Producer", Message = "Hello from Server" };
+            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+            channel.BasicPublish("", "test-queue", null, body);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

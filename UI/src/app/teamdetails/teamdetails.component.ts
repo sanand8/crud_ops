@@ -16,6 +16,7 @@ export class TeamdetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.refreshList();
+    //this.service.getMessage();
   }
   populateForm(selectedRecord:Team){
     this.service.formData = Object.assign({},selectedRecord);
