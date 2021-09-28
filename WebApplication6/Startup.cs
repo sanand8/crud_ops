@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.ServiceBus;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication6.Models;
+using WebApplication6.Service;
 
 namespace WebApplication6
 {
@@ -32,6 +34,10 @@ namespace WebApplication6
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<IQueueClient>(x => 
+            new QueueClient(Configuration.GetValue<string>("ServiceBus:ConnectionString"),
+            Configuration.GetValue<string>("ServiceBus:QueueName")));
+            services.AddSingleton<IMessagePublisher, MessagePublisher>();
             services.AddDbContext<PlayerContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors();
         }

@@ -52,6 +52,18 @@
               "target": "Package",
               "version": "[6.4.4, )"
             },
+            "Foundatio": {
+              "target": "Package",
+              "version": "[10.2.2, )"
+            },
+            "Microsoft.AspNet.WebPages": {
+              "target": "Package",
+              "version": "[3.2.7, )"
+            },
+            "Microsoft.Azure.ServiceBus": {
+              "target": "Package",
+              "version": "[5.1.3, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.18, )"

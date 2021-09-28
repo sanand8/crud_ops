@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
 using WebApplication6.Models;
+using WebApplication6.Service;
 
 namespace WebApplication6.Controllers
 {
@@ -14,11 +15,14 @@ namespace WebApplication6.Controllers
     [ApiController]
     public class PlayersController : ControllerBase
     {
+        private readonly IMessagePublisher messagePublisher;
         private readonly PlayerContext _context;
 
-        public PlayersController(PlayerContext context)
+        
+        public PlayersController(PlayerContext context, IMessagePublisher messagePublisher)
         {
             _context = context;
+            this.messagePublisher = messagePublisher;
         }
 
         // GET: api/Players
@@ -32,13 +36,14 @@ namespace WebApplication6.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Player>> GetPlayer(int id)
         {
+            await messagePublisher.Publish("All players are shown");
             var player = await _context.Players.FindAsync(id);
 
             if (player == null)
             {
                 return NotFound();
             }
-
+            await messagePublisher.Publish(player);
             return player;
         }
 
@@ -57,6 +62,7 @@ namespace WebApplication6.Controllers
 
             try
             {
+                await messagePublisher.Publish(player.Number+"is updated");
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
